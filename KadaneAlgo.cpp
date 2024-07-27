@@ -6,28 +6,26 @@
 using namespace std;
 void Kadane(vector<int>arr, int n)
 {
-    int si=-1,ei=-1,sum=0,c=0;
+    int si=-1,ei=-1,sum=0,c=0,msum=INT_MIN;
     for(int i=0;i<n;i++)
     {
+        if(sum==0)
+        si=i;
         sum+=arr[i];
-        if(sum<0)
+        if(msum<sum)
         {
-            sum=0;
-            c=0;
-        }
-        else
-        {
-            if(c==0)
-            si=i;
-            else
+            msum=sum;
             ei=i;
-            c++;
         }
+
+        if(sum<0)
+        sum=0;
     }
-    cout<<"The maximum subarray sum is: "<<sum<<" which is in the range "<<si<<"to "<<ei<<endl;
+    cout<<"The maximum subarray sum is: "<<msum<<" which is in the range "<<si<<" to "<<ei<<endl;
     cout<<"The array of maximum subarray sum is as follows: "<<endl;
     for(int i=si;i<=ei;i++)
-    cout<<arr[i]<<",";
+    cout<<arr[i]<<" ";
+    // cout<<"The maximum subarray sum is: "<<msum<<endl;
 }
 int main()
 {
